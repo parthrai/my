@@ -4,32 +4,30 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Response;
 
-class UsersController extends Controller
+class UsersControllerApi extends Controller
 {
-    //
-
     public function index(){
 
         $users=User::all();
 
+        return response(User::all()->jsonSerialize(), Response::HTTP_OK);
 
 
-        return view('users.listUsers');
     }
 
     public function store(Request $request){
 
 
-         $users=   User::create([
-                'name'=>$request['name'],
-                'email'=>$request['email'],
-                'type' => $request['type'],
-                'password' => Hash::make($request['password']),
+        $users=   User::create([
+            'name'=>$request['name'],
+            'email'=>$request['email'],
+            'type' => $request['type'],
+            'password' => Hash::make($request['password']),
 
 
-            ]);
+        ]);
 
         return response($users->jsonSerialize(), Response::HTTP_CREATED);
 

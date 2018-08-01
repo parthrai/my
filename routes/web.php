@@ -23,3 +23,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/users', 'UsersController', [
     'except' => ['edit', 'show']
 ]);
+
+Route::get('/delete','UsersController@delete');

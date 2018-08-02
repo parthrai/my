@@ -14000,6 +14000,12 @@ window.Vue = __webpack_require__(37);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+//*******************  Utilities
+
+Vue.component('alert-box', __webpack_require__(54));
+
+//********************************************
+
 Vue.component('example-component', __webpack_require__(40));
 Vue.component('list-users', __webpack_require__(43));
 Vue.component('user-row', __webpack_require__(51));
@@ -47571,6 +47577,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -47578,7 +47596,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
 
             users: [],
-
             selectedUsers: [],
             selected: {},
 
@@ -47589,7 +47606,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 password: ''
 
             },
-            modalShown: false
+
+            modalShown: false,
+
+            alert: {
+                show: false,
+                class: '',
+                content: ''
+            },
+
+            showAlerts: false
 
         };
     },
@@ -47626,11 +47652,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.selected.data = this.selectedUsers;
 
-            axios.delete('http://cms.test/api/users/delete', this.selected).then(function (response) {
+            axios.post('http://cms.test/api/users/delete', this.selected).then(function (response) {
 
                 _this3.updateData();
                 _this3.selectedUsers = [];
             });
+
+            this.alert = {
+                class: 'alert alert-warning alert-dismissible fade show',
+                content: 'Users successfully deleted ! ',
+                show: true
+            };
+
+            console.log(this.alert);
         },
         submitFormNewUser: function submitFormNewUser() {
             this.modalShown = !this.modalShown;
@@ -47645,6 +47679,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$emit('exit', true);
 
             this.close();
+        },
+        closeAlert: function closeAlert() {
+
+            this.alert.show = false;
         }
     }
 });
@@ -47896,6 +47934,23 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
+    _vm.alert.show
+      ? _c(
+          "div",
+          [
+            _c("alert-box", {
+              class: _vm.alert.class,
+              attrs: { data: _vm.alert },
+              on: { close: _vm.closeAlert }
+            })
+          ],
+          1
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c("br"),
+    _c("br"),
+    _vm._v(" "),
     _c("div", { staticClass: "card-header" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-lg-6" }, [
@@ -47990,8 +48045,7 @@ var render = function() {
                 ])
               ])
             ])
-          }),
-          _vm._v("\n\n\n       " + _vm._s(_vm.selectedUsers) + "\n\n    ")
+          })
         ],
         2
       )
@@ -48231,6 +48285,115 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-6b8cb598", module.exports)
+  }
+}
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(11)
+/* script */
+var __vue_script__ = __webpack_require__(55)
+/* template */
+var __vue_template__ = __webpack_require__(56)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Utilities\\Alert.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6965aa7a", Component.options)
+  } else {
+    hotAPI.reload("data-v-6965aa7a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['data'],
+    methods: {
+        close: function close() {
+
+            this.$emit('close');
+        }
+    }
+});
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: { type: "button" },
+        on: { click: _vm.close }
+      },
+      [_vm._v("×")]
+    ),
+    _vm._v(" "),
+    _c("strong", [_vm._v(_vm._s(_vm.data.content))])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6965aa7a", module.exports)
   }
 }
 

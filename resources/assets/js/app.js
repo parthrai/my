@@ -15,6 +15,13 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
+//*******************  Utilities
+
+Vue.component('alert-box', require('./components/Utilities/Alert.vue'));
+
+//********************************************
+
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('list-users', require('./components/ListUsers/ListUsers.vue'));
 Vue.component('user-row', require('./components/ListUsers/User.vue'));

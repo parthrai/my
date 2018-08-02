@@ -21,4 +21,4 @@ Route::resource('/users', 'UsersControllerApi', [
     'except' => ['edit', 'show']
 ]);
 
-Route::delete('/users/delete','UsersControllerApi@destroy');
+Route::post('/users/delete','UsersControllerApi@destroy');

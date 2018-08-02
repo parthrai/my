@@ -67,6 +67,18 @@
 
         <!-- end Modal -->
 
+
+
+        <div v-if="alert.show">
+                <alert-box
+                        v-bind:class="alert.class"
+                    v-bind:data="alert"
+                        @close="closeAlert"
+                ></alert-box>
+        </div>
+
+        <br><br>
+
     <div class="card-header">
         <div class="row">
         <div class="col-lg-6">
@@ -110,7 +122,7 @@
             </tbody>
 
 
-           {{selectedUsers }}
+
 
         </table>
     </div>
@@ -125,7 +137,6 @@
             return{
 
                 users:[],
-
                 selectedUsers:[],
                 selected:{
                 },
@@ -137,7 +148,16 @@
                     password:'',
 
                 },
-                modalShown: false,
+
+                modalShown:false,
+
+                alert:{
+                    show:false,
+                    class:'',
+                    content:'',
+                },
+
+                showAlerts:false,
 
 
             }
@@ -174,18 +194,20 @@
             deleteUsers(){
                 this.selected.data=this.selectedUsers;
 
-                axios.delete('http://cms.test/api/users/delete',this.selected)
+                axios.post('http://cms.test/api/users/delete',this.selected)
                     .then(response => {
 
                         this.updateData();
                         this.selectedUsers=[]
                     });
 
+                this.alert={
+                    class:'alert alert-warning alert-dismissible fade show',
+                    content:'Users successfully deleted ! ',
+                    show:true,
+                }
 
-
-
-
-
+                console.log(this.alert);
 
 
             },
@@ -207,6 +229,11 @@
 
             },
 
+
+            closeAlert(){
+
+                this.alert.show=false;
+            }
 
 
 

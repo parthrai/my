@@ -4,8 +4,9 @@
 
 
             <button type="button" class="close" @click="close">&times;</button>
-      
+
             <strong>{{data.content}}</strong>
+       
 
     </div>
 

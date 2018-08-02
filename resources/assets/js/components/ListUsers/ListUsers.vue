@@ -110,6 +110,7 @@
 
 
             <tbody v-for="(user,index) in users">
+                  <transition name="fade">
 
                     <tr>
                             <td>{{user.name}}</td>
@@ -119,6 +120,7 @@
                             <td><input type="checkbox" class="form-check" :value="user.id" v-model="selectedUsers" ></td>
 
                       </tr>
+                </transition>
 
             </tbody>
 
@@ -195,7 +197,7 @@
             deleteUsers(){
                 this.selected.data=this.selectedUsers;
 
-                axios.post('http://cms.test/api/users/delete',this.selected)
+                axios.post('/api/users/delete',this.selected)
                     .then(response => {
 
                         this.updateData();
@@ -218,7 +220,7 @@
 
                 console.log(this.modalShown);
 
-                axios.post('http://cms.test/api/users',this.newUser)
+                axios.post('/api/users',this.newUser)
                     .then(response => {
                         console.log(response);
                     });

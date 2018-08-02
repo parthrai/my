@@ -47594,6 +47594,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -47657,7 +47659,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.selected.data = this.selectedUsers;
 
-            axios.post('http://cms.test/api/users/delete', this.selected).then(function (response) {
+            axios.post('/api/users/delete', this.selected).then(function (response) {
 
                 _this3.updateData();
                 _this3.selectedUsers = [];
@@ -47676,7 +47678,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             console.log(this.modalShown);
 
-            axios.post('http://cms.test/api/users', this.newUser).then(function (response) {
+            axios.post('/api/users', this.newUser).then(function (response) {
                 console.log(response);
             });
 
@@ -48005,59 +48007,66 @@ var render = function() {
             _vm._m(2),
             _vm._v(" "),
             _vm._l(_vm.users, function(user, index) {
-              return _c("tbody", [
-                _c("tr", [
-                  _c("td", [_vm._v(_vm._s(user.name))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user.type))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user.email))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user.updated_at))]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.selectedUsers,
-                          expression: "selectedUsers"
-                        }
-                      ],
-                      staticClass: "form-check",
-                      attrs: { type: "checkbox" },
-                      domProps: {
-                        value: user.id,
-                        checked: Array.isArray(_vm.selectedUsers)
-                          ? _vm._i(_vm.selectedUsers, user.id) > -1
-                          : _vm.selectedUsers
-                      },
-                      on: {
-                        change: function($event) {
-                          var $$a = _vm.selectedUsers,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = user.id,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 && (_vm.selectedUsers = $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                (_vm.selectedUsers = $$a
-                                  .slice(0, $$i)
-                                  .concat($$a.slice($$i + 1)))
+              return _c(
+                "tbody",
+                [
+                  _c("transition", { attrs: { name: "fade" } }, [
+                    _c("tr", [
+                      _c("td", [_vm._v(_vm._s(user.name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(user.type))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(user.email))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(user.updated_at))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selectedUsers,
+                              expression: "selectedUsers"
                             }
-                          } else {
-                            _vm.selectedUsers = $$c
+                          ],
+                          staticClass: "form-check",
+                          attrs: { type: "checkbox" },
+                          domProps: {
+                            value: user.id,
+                            checked: Array.isArray(_vm.selectedUsers)
+                              ? _vm._i(_vm.selectedUsers, user.id) > -1
+                              : _vm.selectedUsers
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.selectedUsers,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = user.id,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    (_vm.selectedUsers = $$a.concat([$$v]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.selectedUsers = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
+                              } else {
+                                _vm.selectedUsers = $$c
+                              }
+                            }
                           }
-                        }
-                      }
-                    })
+                        })
+                      ])
+                    ])
                   ])
-                ])
-              ])
+                ],
+                1
+              )
             })
           ],
           2

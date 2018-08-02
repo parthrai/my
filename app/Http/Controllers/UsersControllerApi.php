@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 class UsersControllerApi extends Controller
 {
@@ -39,6 +40,25 @@ class UsersControllerApi extends Controller
         dd($request);
 
         dd(count($request['delete']));
+
+    }
+
+
+    public function destroy(Request $request){
+
+        $users= $request['data'];
+
+        foreach($users as $user){
+            $usr=User::find($user);
+            $usr->delete();
+
+        }
+
+        return response("done", Response::HTTP_CREATED);
+
+
+
+
 
     }
 }

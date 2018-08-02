@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('/users', 'UsersControllerApi', [
     'except' => ['edit', 'show']
 ]);
+
+Route::delete('/users/delete','UsersControllerApi@destroy');

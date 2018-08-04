@@ -120,16 +120,7 @@
                 select-all
                 class="elevation-1"
         >
-            <template slot="headerCell" slot-scope="props">
-                <v-tooltip bottom>
-                     <span slot="activator">
-                            {{ props.header.text }}
-                     </span>
-                    <span>
-                            {{ props.header.text }}
-                    </span>
-                </v-tooltip>
-            </template>
+
 
             <template slot="items" slot-scope="props">
                 <td>
@@ -239,12 +230,12 @@
                     {
                         text: 'Name',
                         align: 'left',
-                        sortable: false,
+                        sortable: true,
                         value: 'name'
                     },
-                    { text: 'type', value: 'calories' },
-                    { text: 'email', value: 'fat' },
-                    { text: 'last update', value: 'carbs' },
+                    { text: 'type', value: 'type',align:'center' },
+                    { text: 'email', value: 'email' , align:'center'},
+                    { text: 'last update', value: 'updated_at', align:'center' },
 
                 ],
 

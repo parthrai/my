@@ -68249,15 +68249,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -68290,9 +68281,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             headers: [{
                 text: 'Name',
                 align: 'left',
-                sortable: false,
+                sortable: true,
                 value: 'name'
-            }, { text: 'type', value: 'calories' }, { text: 'email', value: 'fat' }, { text: 'last update', value: 'carbs' }]
+            }, { text: 'type', value: 'type', align: 'center' }, { text: 'email', value: 'email', align: 'center' }, { text: 'last update', value: 'updated_at', align: 'center' }]
 
         };
     },
@@ -68720,34 +68711,6 @@ var render = function() {
               "select-all": ""
             },
             scopedSlots: _vm._u([
-              {
-                key: "headerCell",
-                fn: function(props) {
-                  return [
-                    _c("v-tooltip", { attrs: { bottom: "" } }, [
-                      _c(
-                        "span",
-                        { attrs: { slot: "activator" }, slot: "activator" },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.header.text) +
-                              "\n                 "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("span", [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(props.header.text) +
-                            "\n                "
-                        )
-                      ])
-                    ])
-                  ]
-                }
-              },
               {
                 key: "items",
                 fn: function(props) {

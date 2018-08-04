@@ -82,10 +82,13 @@
 
     <div class="card-header">
         <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-3">
             Users
         </div>
+
+
         <div class="col-lg-6 text-right">
+
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add</button>
             <button type="button" class="btn btn-danger" @click="deleteUsers" >Delete</button>
         </div>
@@ -93,6 +96,65 @@
     </div>
 
     <div class="card-body">
+
+        <v-card>
+            <v-card-title>
+                Users
+                <v-spacer></v-spacer>
+                <v-text-field
+                        v-model="search"
+                        append-icon="search"
+                        label="Search"
+                        single-line
+                        hide-details
+                ></v-text-field>
+            </v-card-title>
+        </v-card>
+
+        <v-data-table
+                :headers="headers"
+                :items="users"
+                :search="search"
+                v-model="selectedUsers"
+                item-key="name"
+                select-all
+                class="elevation-1"
+        >
+            <template slot="headerCell" slot-scope="props">
+                <v-tooltip bottom>
+                     <span slot="activator">
+                            {{ props.header.text }}
+                     </span>
+                    <span>
+                            {{ props.header.text }}
+                    </span>
+                </v-tooltip>
+            </template>
+
+            <template slot="items" slot-scope="props">
+                <td>
+                    <v-checkbox
+                            v-model="selectedUsers"
+                            primary
+                            hide-details
+                    ></v-checkbox>
+                </td>
+
+                <td>{{ props.item.name }}</td>
+                <td class="text-xs-right">{{ props.item.type }}</td>
+                <td class="text-xs-right">{{ props.item.email }}</td>
+
+                <td class="text-xs-right">{{ props.item.updated_at }}</td>
+
+            </template>
+        </v-data-table>
+
+
+        {{selectedUsers}}
+
+
+
+        <!--
 
         <table class="table">
             <thead>
@@ -109,25 +171,32 @@
 
 
 
-            <tbody v-for="(user,index) in users">
-                  <transition name="fade">
+                <tbody v-for="(user,index) in users" >
 
-                    <tr>
+                    <transition name="fade">
+
+                        <tr>
                             <td>{{user.name}}</td>
                             <td>{{user.type}}</td>
                             <td>{{user.email}}</td>
                             <td>{{user.updated_at}}</td>
                             <td><input type="checkbox" class="form-check" :value="user.id" v-model="selectedUsers" ></td>
 
-                      </tr>
-                </transition>
+                        </tr>
+                    </transition>
 
-            </tbody>
+                </tbody>
+
+
+
 
 
 
 
         </table>
+
+        -->
+
     </div>
 
     </section>
@@ -139,6 +208,7 @@
         data(){
             return{
 
+                search:'',
                 users:[],
                 selectedUsers:[],
                 selected:{
@@ -160,11 +230,34 @@
                     content:'',
                 },
 
+
                 showAlerts:false,
+
+
+
+                headers: [
+                    {
+                        text: 'Name',
+                        align: 'left',
+                        sortable: false,
+                        value: 'name'
+                    },
+                    { text: 'type', value: 'calories' },
+                    { text: 'email', value: 'fat' },
+                    { text: 'last update', value: 'carbs' },
+
+                ],
 
 
             }
         },
+
+        watch: {
+            selectedUsers(after, before) {
+               console.log(this.selectedUsers);
+            }
+        },
+
         mounted(){
 
             //console.log(this.users.data);
@@ -178,6 +271,8 @@
         },
 
         methods:{
+
+
             close() {
                 this.$emit('hide');
 
@@ -210,7 +305,7 @@
                     show:true,
                 }
 
-                console.log(this.alert);
+
 
 
             },

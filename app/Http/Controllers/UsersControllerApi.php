@@ -55,10 +55,35 @@ class UsersControllerApi extends Controller
         }
 
         return response("done", Response::HTTP_CREATED);
+     }
+
+
+     public function getSearchResults(Request $request){
 
 
 
+        $terms = $request['query'];
 
 
-    }
+
+            /*
+
+         $search_query = preg_replace( "/[%\?]+/", "", $search_query ); // Strip SQL metachars
+         $search_query = preg_replace( "/^\s+/", "", $search_query );   // Strip leading whitespace
+         $search_query = preg_replace( "/\s+$/", "", $search_query );   // Strip trailing whitespace
+         $terms        = preg_split( "/\s+/", $search_query, -1, PREG_SPLIT_NO_EMPTY );
+*/
+
+
+         $result = \App\User::where([
+             ['name', 'LIKE', '%' . $terms . '%']
+
+         ])->get();
+
+
+
+         return response($result->jsonSerialize(), Response::HTTP_OK);
+
+
+     }
 }

@@ -22,3 +22,4 @@ Route::resource('/users', 'UsersControllerApi', [
 ]);
 
 Route::post('/users/delete','UsersControllerApi@destroy');
+Route::post('/users/search','UsersControllerApi@getSearchResults');

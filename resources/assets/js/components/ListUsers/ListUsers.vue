@@ -262,10 +262,14 @@
             //console.log(this.users.data);
             axios.get('/api/users')
                 .then(response => {
-                    //console.log(response.data);
+                    console.log(response.data);
                     this.users=(response.data);
                     console.log(this.users);
-                });
+                }) .catch(function (error) {
+                // handle error
+                console.log("the error is ");
+                console.log(error);
+            });
 
         },
 

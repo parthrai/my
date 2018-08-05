@@ -68309,9 +68309,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         //console.log(this.users.data);
         axios.get('/api/users').then(function (response) {
-            //console.log(response.data);
+            console.log(response.data);
             _this.users = response.data;
             console.log(_this.users);
+        }).catch(function (error) {
+            // handle error
+            console.log("the error is ");
+            console.log(error);
         });
     },
 

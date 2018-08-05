@@ -68245,10 +68245,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -68259,6 +68255,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             users: [],
             selectedUsers: [],
             selected: {},
+
+            rules: {
+                required: function required(value) {
+                    return !!value || 'Required.';
+                },
+
+                email: function email(value) {
+                    var pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return pattern.test(value) || 'Invalid e-mail.';
+                }
+            },
+
+            dialog: false,
 
             newUser: {
                 name: '',
@@ -68349,10 +68358,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(response);
             });
 
-            console.log("Done!");
-            this.$emit('exit', true);
+            this.dialog = false;
 
-            this.close();
+            this.alert = {
+                class: 'alert alert-success alert-dismissible fade show',
+                content: this.newUser.name + ' successfully added ! ',
+                show: true
+            };
+
+            this.newUser.name = '';
+            this.newUser.email = '';
+            this.newUser.type = '';
+            this.newUser.password = '';
         },
         closeAlert: function closeAlert() {
 
@@ -68372,248 +68389,6 @@ var render = function() {
   return _c(
     "section",
     [
-      _c(
-        "div",
-        {
-          staticClass: "modal fade",
-          class: { in: _vm.modalShown },
-          attrs: { id: "myModal", role: "dialog" }
-        },
-        [
-          _c("div", { staticClass: "modal-dialog" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c(
-                  "form",
-                  {
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.submitFormNewUser($event)
-                      }
-                    }
-                  },
-                  [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "control-label col-sm-2",
-                          attrs: { for: "email" }
-                        },
-                        [_vm._v("Name:")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-sm-10" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.newUser.name,
-                              expression: "newUser.name"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "name",
-                            placeholder: "Enter name",
-                            name: "name"
-                          },
-                          domProps: { value: _vm.newUser.name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.newUser, "name", $event.target.value)
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "control-label col-sm-2",
-                          attrs: { for: "email" }
-                        },
-                        [_vm._v("Email:")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-sm-10" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.newUser.email,
-                              expression: "newUser.email"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "email",
-                            id: "email",
-                            placeholder: "Enter email",
-                            name: "email"
-                          },
-                          domProps: { value: _vm.newUser.email },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.newUser,
-                                "email",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "control-label col-sm-2",
-                          attrs: { for: "email" }
-                        },
-                        [_vm._v("Type")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-sm-10" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.newUser.type,
-                                expression: "newUser.type"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { id: "type", name: "type" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.newUser,
-                                  "type",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "admin" } }, [
-                              _vm._v("Admin")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "user" } }, [
-                              _vm._v("User")
-                            ])
-                          ]
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "control-label col-sm-2",
-                          attrs: { for: "pwd" }
-                        },
-                        [_vm._v("Password:")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-sm-10" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.newUser.password,
-                              expression: "newUser.password"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "password",
-                            id: "pwd",
-                            placeholder: "Enter password",
-                            name: "pwd"
-                          },
-                          domProps: { value: _vm.newUser.password },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.newUser,
-                                "password",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("div", { staticClass: "col-sm-offset-2 col-sm-10" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-default",
-                            attrs: { type: "submit" },
-                            on: { click: _vm.submitFormNewUser }
-                          },
-                          [_vm._v("Submit")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-default",
-                            attrs: { type: "submit" },
-                            on: { click: _vm.close }
-                          },
-                          [_vm._v("close")]
-                        )
-                      ])
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm._m(1)
-            ])
-          ])
-        ]
-      ),
-      _vm._v(" "),
       _c("transition", { attrs: { name: "fade" } }, [
         _vm.alert.show
           ? _c(
@@ -68639,30 +68414,218 @@ var render = function() {
             _vm._v("\n        Users\n    ")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6 text-right" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary",
-                attrs: {
-                  type: "button",
-                  "data-toggle": "modal",
-                  "data-target": "#myModal"
-                }
-              },
-              [_vm._v("Add")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-danger",
-                attrs: { type: "button" },
-                on: { click: _vm.deleteUsers }
-              },
-              [_vm._v("Delete")]
-            )
-          ])
+          _c(
+            "div",
+            { staticClass: "col-lg-9 text-right" },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  attrs: { type: "button" },
+                  on: { click: _vm.deleteUsers }
+                },
+                [_vm._v("Delete")]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                { attrs: { fab: "", dark: "", color: "blue" } },
+                [_c("v-icon", { attrs: { dark: "" } }, [_vm._v("list")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-dialog",
+                {
+                  attrs: { persistent: "", "max-width": "500px" },
+                  model: {
+                    value: _vm.dialog,
+                    callback: function($$v) {
+                      _vm.dialog = $$v
+                    },
+                    expression: "dialog"
+                  }
+                },
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        slot: "activator",
+                        fab: "",
+                        color: "primary",
+                        dark: ""
+                      },
+                      slot: "activator"
+                    },
+                    [_c("v-icon", { attrs: { dark: "" } }, [_vm._v("add")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card",
+                    [
+                      _c("v-card-title", [
+                        _c("span", { staticClass: "headline" }, [
+                          _vm._v("New user")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-text",
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { "grid-list-md": "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                { attrs: { wrap: "" } },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Name",
+                                          hint: "User's full name",
+                                          required: ""
+                                        },
+                                        model: {
+                                          value: _vm.newUser.name,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.newUser, "name", $$v)
+                                          },
+                                          expression: "newUser.name"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          items: ["User", "Admin"],
+                                          label: "Type",
+                                          required: ""
+                                        },
+                                        model: {
+                                          value: _vm.newUser.type,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.newUser, "type", $$v)
+                                          },
+                                          expression: "newUser.type"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Email",
+                                          rules: [
+                                            _vm.rules.required,
+                                            _vm.rules.email
+                                          ]
+                                        },
+                                        model: {
+                                          value: _vm.newUser.email,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.newUser, "email", $$v)
+                                          },
+                                          expression: "newUser.email"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Password",
+                                          type: "password",
+                                          required: ""
+                                        },
+                                        model: {
+                                          value: _vm.newUser.password,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.newUser,
+                                              "password",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "newUser.password"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("small", [_vm._v("*indicates required field")])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              nativeOn: {
+                                click: function($event) {
+                                  _vm.dialog = false
+                                }
+                              }
+                            },
+                            [_vm._v("Close")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              on: { click: _vm.submitFormNewUser }
+                            },
+                            [_vm._v("Save")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
         ])
       ]),
       _vm._v(" "),
@@ -68721,11 +68684,11 @@ var render = function() {
                         _c("v-checkbox", {
                           attrs: { primary: "", "hide-details": "" },
                           model: {
-                            value: _vm.selectedUsers,
+                            value: props.selectedUsers,
                             callback: function($$v) {
-                              _vm.selectedUsers = $$v
+                              _vm.$set(props, "selectedUsers", $$v)
                             },
-                            expression: "selectedUsers"
+                            expression: "props.selectedUsers"
                           }
                         })
                       ],
@@ -68765,40 +68728,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h4", { staticClass: "modal-title" }, [_vm._v("Modal Header")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close text-right",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("×")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-default",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

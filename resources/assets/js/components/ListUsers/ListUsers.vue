@@ -3,67 +3,7 @@
         <!-- Modal -->
 
 
-        <div id="myModal" class="modal fade" role="dialog" :class="{ in: modalShown }">
-            <div class="modal-dialog">
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Modal Header</h4>
-                        <button type="button" class="close text-right" data-dismiss="modal">&times;</button>
-
-                    </div>
-                    <div class="modal-body">
-                        <form v-on:submit.prevent="submitFormNewUser" >
-
-
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="email">Name:</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" v-model="newUser.name">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="email">Email:</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" v-model="newUser.email">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="email">Type</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" id="type" name="type" v-model="newUser.type">
-                                        <option value="admin">Admin</option>
-                                        <option value="user">User</option>
-
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="pwd">Password:</label>
-                                <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" v-model="newUser.password">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-default" @click="submitFormNewUser">Submit</button>
-                                    <button type="submit" class="btn btn-default" @click="close">close</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
 
         <!-- end Modal -->
 
@@ -87,10 +27,66 @@
         </div>
 
 
-        <div class="col-lg-6 text-right">
+        <div class="col-lg-9 text-right">
 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add</button>
+
             <button type="button" class="btn btn-danger" @click="deleteUsers" >Delete</button>
+
+
+            <v-btn fab dark color="blue">
+                <v-icon dark>list</v-icon>
+            </v-btn>
+
+
+
+                <v-dialog v-model="dialog" persistent max-width="500px">
+                    <v-btn fab slot="activator" color="primary" dark> <v-icon dark>add</v-icon></v-btn>
+                    <v-card>
+                        <v-card-title>
+                            <span class="headline">New user</span>
+                        </v-card-title>
+                        <v-card-text>
+                            <v-container grid-list-md>
+                                <v-layout wrap>
+                                    <v-flex xs12>
+                                        <v-text-field label="Name" hint="User's full name" v-model="newUser.name" required></v-text-field>
+
+                                    </v-flex>
+
+                                    <v-flex xs12>
+                                        <v-select v-model="newUser.type"
+                                                :items="['User', 'Admin']"
+                                                label="Type"
+                                                required
+                                        ></v-select>
+
+
+                                    </v-flex>
+
+                                    <v-flex xs12>
+                                        <v-text-field label="Email" :rules="[rules.required, rules.email]" v-model="newUser.email"></v-text-field>
+                                    </v-flex>
+                                    <v-flex xs12>
+                                        <v-text-field label="Password" type="password" required v-model="newUser.password"></v-text-field>
+                                    </v-flex>
+
+
+                                </v-layout>
+                            </v-container>
+                            <small>*indicates required field</small>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" flat @click.native="dialog = false">Close</v-btn>
+                            <v-btn color="blue darken-1" flat  @click="submitFormNewUser">Save</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+
+
+
+
         </div>
         </div>
     </div>
@@ -125,7 +121,7 @@
             <template slot="items" slot-scope="props">
                 <td>
                     <v-checkbox
-                            v-model="selectedUsers"
+                            v-model="props.selectedUsers"
                             primary
                             hide-details
                     ></v-checkbox>
@@ -204,6 +200,18 @@
                 selectedUsers:[],
                 selected:{
                 },
+
+                rules: {
+                    required: value => !!value || 'Required.',
+
+                    email: value => {
+                        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                        return pattern.test(value) || 'Invalid e-mail.'
+                    }
+                },
+
+
+                dialog:false,
 
                 newUser:{
                     name:'',
@@ -311,10 +319,18 @@
                         console.log(response);
                     });
 
-                console.log("Done!");
-                this.$emit('exit', true)
+               this.dialog=false;
 
-                this.close();
+                this.alert={
+                    class:'alert alert-success alert-dismissible fade show',
+                    content:this.newUser.name+' successfully added ! ',
+                    show:true,
+                }
+
+                this.newUser.name='';
+                this.newUser.email='';
+                this.newUser.type='';
+                this.newUser.password='';
 
             },
 

@@ -21,7 +21,7 @@
 
                     <div id="app" dark>
 
-                        <v-app>
+                        <v-app dark>
                          <h1>Hello</h1>
 
 

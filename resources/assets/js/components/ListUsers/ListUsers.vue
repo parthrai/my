@@ -193,6 +193,8 @@
 <script>
 
     export default{
+
+
         data(){
             return{
 
@@ -278,6 +280,9 @@
                 console.log("the error is ");
                 console.log(error);
             });
+
+
+
 
         },
 

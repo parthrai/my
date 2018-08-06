@@ -41,9 +41,13 @@ Vue.component('alert-box', require('./components/Utilities/Alert.vue'));
 //********************************************
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+
 Vue.component('list-users', require('./components/ListUsers/ListUsers.vue'));
 Vue.component('user-row', require('./components/ListUsers/User.vue'));
 Vue.component('home-test', require('./components/HomeComponent.vue'));
+
+Vue.component('main-nav',require('./components/Navigation/Navigation.vue'));
+
 
 
 const app = new Vue({

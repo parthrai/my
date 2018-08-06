@@ -122,6 +122,7 @@
                 <td>
                     <v-checkbox
                             v-model="props.selectedUsers"
+                            value="props.item"
                             primary
                             hide-details
                     ></v-checkbox>

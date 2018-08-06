@@ -11,8 +11,20 @@ window.Vue = require('vue');
 
 
 import Vuetify from 'vuetify'
+import VueRouter from 'vue-router'
+import routes from './routes'
+
 
 Vue.use(Vuetify)
+
+
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+    routes
+});
+
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,8 +42,10 @@ Vue.component('alert-box', require('./components/Utilities/Alert.vue'));
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('list-users', require('./components/ListUsers/ListUsers.vue'));
 Vue.component('user-row', require('./components/ListUsers/User.vue'));
+Vue.component('home-test', require('./components/HomeComponent.vue'));
 
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router
 });

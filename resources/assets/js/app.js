@@ -13,6 +13,7 @@ window.Vue = require('vue');
 import Vuetify from 'vuetify'
 import VueRouter from 'vue-router'
 import routes from './routes'
+import { store } from './store/index'
 
 
 Vue.use(Vuetify)
@@ -47,5 +48,6 @@ Vue.component('home-test', require('./components/HomeComponent.vue'));
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store
 });

@@ -252,6 +252,13 @@
             }
         },
 
+        computed:{
+            check(){
+                return this.$store.getters.getName
+            }
+
+        },
+
         watch: {
             selectedUsers(after, before) {
                console.log(this.selectedUsers);

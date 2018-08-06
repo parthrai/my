@@ -72630,6 +72630,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         namee: function namee() {
 
+            this.$store.commit('increment', "John");
             return this.$store.getters.getName;
         }
     }
@@ -72657,7 +72658,11 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 
     },
 
-    mutations: {},
+    mutations: {
+        increment: function increment(state, n) {
+            state.name = n;
+        }
+    },
 
     actions: {},
 

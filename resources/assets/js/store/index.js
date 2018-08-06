@@ -8,9 +8,16 @@ export const store = new Vuex.Store({
     state:{
         name:'Parth',
 
+
     },
 
-    mutations : {},
+    mutations : {
+
+        increment (state, n) {
+            state.name = n
+        }
+
+    },
 
     actions:{},
 
@@ -18,7 +25,7 @@ export const store = new Vuex.Store({
 
         getName(state){
 
-            
+
             return state.name
         }
 

@@ -25,3 +25,5 @@ Route::resource('/users', 'UsersController', [
 ]);
 
 Route::get('/delete','UsersController@delete');
+
+Route::get('/meta/userdata', 'MetaDataApiController@UserData');

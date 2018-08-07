@@ -269,7 +269,7 @@
 
         mounted(){
 
-            //console.log(this.users.data);
+            console.log("I am here");
             axios.get('/api/users')
                 .then(response => {
                     console.log(response.data);

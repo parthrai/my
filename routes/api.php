@@ -21,5 +21,12 @@ Route::resource('/users', 'UsersControllerApi', [
     'except' => ['edit', 'show']
 ]);
 
+
+Route::group(['middleware' => ['auth:api']], function () {
+
+Route::get('/meta/userdata', 'MetaDataApiController@UserData');
+
+});
+
 Route::post('/users/delete','UsersControllerApi@destroy');
 Route::post('/users/search','UsersControllerApi@getSearchResults');

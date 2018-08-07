@@ -25093,10 +25093,10 @@ Vue.component('alert-box', __webpack_require__(56));
 Vue.component('example-component', __webpack_require__(59));
 
 Vue.component('list-users', __webpack_require__(13));
-Vue.component('user-row', __webpack_require__(65));
+Vue.component('user-row', __webpack_require__(62));
 Vue.component('home-test', __webpack_require__(14));
 
-Vue.component('main-nav', __webpack_require__(62));
+Vue.component('main-nav', __webpack_require__(65));
 
 var app = new Vue({
   el: '#app',
@@ -25142,8 +25142,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
+console.log("ffffffffffffffffffffffffffffff" + token.content);
+
 if (token) {
   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+  console.log("sdfsfsdfsdf");
 } else {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
@@ -70794,7 +70797,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         var _this = this;
 
-        //console.log(this.users.data);
+        console.log("I am here");
         axios.get('/api/users').then(function (response) {
             console.log(response.data);
             _this.users = response.data;
@@ -72528,6 +72531,171 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+Component.options.__file = "resources\\assets\\js\\components\\ListUsers\\User.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6b8cb598", Component.options)
+  } else {
+    hotAPI.reload("data-v-6b8cb598", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['userData', 'index', 'id'],
+
+    data: function data() {
+        return {
+            users: []
+        };
+    },
+    mounted: function mounted() {
+
+        console.log("hello");
+    },
+
+
+    methods: {
+        check: function check() {
+
+            console.log("heee");
+        }
+    }
+});
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("tr", [
+    _c("td", [_vm._v(_vm._s(_vm.userData.name))]),
+    _vm._v(" "),
+    _c("td", [_vm._v(_vm._s(_vm.userData.type))]),
+    _vm._v(" "),
+    _c("td", [_vm._v(_vm._s(_vm.userData.email))]),
+    _vm._v(" "),
+    _c("td", [_vm._v(_vm._s(_vm.userData.updated_at))]),
+    _vm._v(" "),
+    _c("td", [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.users,
+            expression: "users"
+          }
+        ],
+        staticClass: "form-check",
+        attrs: { type: "checkbox" },
+        domProps: {
+          value: _vm.userData,
+          checked: Array.isArray(_vm.users)
+            ? _vm._i(_vm.users, _vm.userData) > -1
+            : _vm.users
+        },
+        on: {
+          change: [
+            function($event) {
+              var $$a = _vm.users,
+                $$el = $event.target,
+                $$c = $$el.checked ? true : false
+              if (Array.isArray($$a)) {
+                var $$v = _vm.userData,
+                  $$i = _vm._i($$a, $$v)
+                if ($$el.checked) {
+                  $$i < 0 && (_vm.users = $$a.concat([$$v]))
+                } else {
+                  $$i > -1 &&
+                    (_vm.users = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                }
+              } else {
+                _vm.users = $$c
+              }
+            },
+            _vm.check
+          ]
+        }
+      })
+    ]),
+    _vm._v("\n    " + _vm._s(this.users) + "\n")
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6b8cb598", module.exports)
+  }
+}
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(66)
+/* template */
+var __vue_template__ = __webpack_require__(67)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
 Component.options.__file = "resources\\assets\\js\\components\\Navigation\\Navigation.vue"
 
 /* hot reload */
@@ -72550,7 +72718,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 63 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -72628,11 +72796,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             drawer: false
         };
+    },
+    mounted: function mounted() {
+
+        console.log("I am here");
+        axios.get('/api/meta/userdata').then(function (response) {
+            console.log(response.data);
+        }).catch(function (error) {
+            // handle error
+            console.log("the error is ");
+            console.log(error);
+        });
     }
 });
 
 /***/ }),
-/* 64 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -72750,171 +72929,6 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-1d8eafd6", module.exports)
-  }
-}
-
-/***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(66)
-/* template */
-var __vue_template__ = __webpack_require__(67)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\ListUsers\\User.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6b8cb598", Component.options)
-  } else {
-    hotAPI.reload("data-v-6b8cb598", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 66 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['userData', 'index', 'id'],
-
-    data: function data() {
-        return {
-            users: []
-        };
-    },
-    mounted: function mounted() {
-
-        console.log("hello");
-    },
-
-
-    methods: {
-        check: function check() {
-
-            console.log("heee");
-        }
-    }
-});
-
-/***/ }),
-/* 67 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("tr", [
-    _c("td", [_vm._v(_vm._s(_vm.userData.name))]),
-    _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.userData.type))]),
-    _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.userData.email))]),
-    _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.userData.updated_at))]),
-    _vm._v(" "),
-    _c("td", [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.users,
-            expression: "users"
-          }
-        ],
-        staticClass: "form-check",
-        attrs: { type: "checkbox" },
-        domProps: {
-          value: _vm.userData,
-          checked: Array.isArray(_vm.users)
-            ? _vm._i(_vm.users, _vm.userData) > -1
-            : _vm.users
-        },
-        on: {
-          change: [
-            function($event) {
-              var $$a = _vm.users,
-                $$el = $event.target,
-                $$c = $$el.checked ? true : false
-              if (Array.isArray($$a)) {
-                var $$v = _vm.userData,
-                  $$i = _vm._i($$a, $$v)
-                if ($$el.checked) {
-                  $$i < 0 && (_vm.users = $$a.concat([$$v]))
-                } else {
-                  $$i > -1 &&
-                    (_vm.users = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-                }
-              } else {
-                _vm.users = $$c
-              }
-            },
-            _vm.check
-          ]
-        }
-      })
-    ]),
-    _vm._v("\n    " + _vm._s(this.users) + "\n")
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6b8cb598", module.exports)
   }
 }
 

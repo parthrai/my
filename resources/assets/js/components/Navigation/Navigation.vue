@@ -71,6 +71,26 @@
             return {
                 drawer: false
             }
-        }
+        },
+
+        mounted(){
+
+            console.log("I am here");
+            axios.get( '/api/meta/userdata')
+                .then(response => {
+                    console.log(response.data);
+
+
+                }) .catch(function (error) {
+                // handle error
+                console.log("the error is ");
+                console.log(error);
+            });
+
+
+
+
+        },
+
     }
 </script>
